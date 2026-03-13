@@ -2,7 +2,6 @@ pipeline {
     agent any
     tools {
         maven 'Maven 3' // Name as configured in Jenkins global tools
-        allure 'Allure' // Name as configured in Jenkins global tools
     }
     stages {
         stage('Build & Test') {
