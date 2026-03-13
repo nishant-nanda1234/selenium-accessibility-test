@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Get age prediction by name from Agify API and validate response.","2150","getAgeByNameTest","ApiAutomationSuite","2026-03-12","passed","2026-03-12","tests.SampleApiTest","ApiTests","tests.SampleApiTest","getAgeByNameTest"
+"Create a new post using JSONPlaceholder API and validate response.","4333","createPostTest","ApiAutomationSuite","2026-03-12","failed","2026-03-12","tests.SampleApiTest","ApiTests","tests.SampleApiTest","createPostTest"
+"Get a post by ID from JSONPlaceholder API and validate response.","523","getPostTest","ApiAutomationSuite","2026-03-12","passed","2026-03-12","tests.SampleApiTest","ApiTests","tests.SampleApiTest","getPostTest"
+"Get gender prediction by name from Genderize API and validate response.","1568","getGenderByNameTest","ApiAutomationSuite","2026-03-12","passed","2026-03-12","tests.SampleApiTest","ApiTests","tests.SampleApiTest","getGenderByNameTest"
+"Get a random dog image from Dog CEO API and validate response.","782","getRandomDogImageTest","ApiAutomationSuite","2026-03-12","passed","2026-03-12","tests.SampleApiTest","ApiTests","tests.SampleApiTest","getRandomDogImageTest"

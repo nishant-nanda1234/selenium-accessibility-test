@@ -1,0 +1,2 @@
+# Ignore Maven target directory and build output
+/target/

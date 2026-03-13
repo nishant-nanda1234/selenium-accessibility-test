@@ -1,0 +1,1 @@
+{"uuid":"484f94ac-404c-460e-a7bf-f37c8a90e6cd","name":"ApiAutomationSuite","children":["14f47dfa-1c1b-4b8f-a271-0bf73bbcab4d"],"befores":[],"afters":[{"name":"tearDownSuite","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1773254925077,"stop":1773254925595}],"start":1773254913960,"stop":1773254925606}
