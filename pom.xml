@@ -57,8 +57,8 @@
             <!-- Applitools Eyes Selenium SDK for Visual AI Testing -->
             <dependency>
                 <groupId>com.applitools</groupId>
-                <artifactId>eyes-selenium-java3</artifactId>
-                <version>3.209.0</version>
+                <artifactId>eyes-selenium-java5</artifactId>
+                <version>5.66.0</version>
             </dependency>
     </dependencies>
     <build>
