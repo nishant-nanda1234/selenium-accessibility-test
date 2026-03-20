@@ -1,0 +1,90 @@
+# Azure DevOps Pipeline for Maven Selenium Project with Allure, ExtentReports, and Custom Steps
+# Edit environment variables and paths as needed
+
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  MAVEN_OPTS: '-Dmaven.test.failure.ignore=false'
+  APPLITOOLS_API_KEY: $(APPLITOOLS_API_KEY)  # Set this in Azure DevOps Pipeline secrets
+
+steps:
+- task: Checkout@1
+  displayName: 'Checkout code'
+
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
+  displayName: 'Set up Java 11'
+
+- script: mvn clean test
+  displayName: 'Build and Test with Maven'
+  env:
+    APPLITOOLS_API_KEY: $(APPLITOOLS_API_KEY)
+
+- task: PublishTestResults@2
+  displayName: 'Publish TestNG Results'
+  inputs:
+    testResultsFiles: 'target/surefire-reports/testng-results.xml'
+    testRunTitle: 'TestNG Results'
+    failTaskOnFailedTests: true
+    testResultsFormat: 'TestNG'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Surefire HTML Report'
+  inputs:
+    PathtoPublish: 'target/surefire-reports/emailable-report.html'
+    ArtifactName: 'SurefireReport'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish ExtentReport HTML'
+  inputs:
+    PathtoPublish: 'target/ExtentReport.html'
+    ArtifactName: 'ExtentReport'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Allure Results'
+  inputs:
+    PathtoPublish: 'allure-results'
+    ArtifactName: 'AllureResults'
+    publishLocation: 'Container'
+
+# Install Allure CLI, generate Allure HTML report, and publish it as an artifact
+- script: |
+    sudo apt-get update
+    sudo apt-get install -y default-jre
+    wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
+    tar -zxvf allure-2.27.0.tgz
+    sudo mv allure-2.27.0 /opt/allure
+    sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+  displayName: 'Install Allure CLI'
+
+- script: |
+    allure generate allure-results --clean -o allure-report
+  displayName: 'Generate Allure HTML Report'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Allure HTML Report'
+  inputs:
+    PathtoPublish: 'allure-report'
+    ArtifactName: 'AllureHtmlReport'
+    publishLocation: 'Container'
+#     npm install -g allure-commandline --save-dev
+#     allure generate allure-results --clean -o allure-report
+#   displayName: 'Generate Allure Report'
+#
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Allure HTML Report'
+#   inputs:
+#     PathtoPublish: 'allure-report'
+#     ArtifactName: 'AllureReport'
+#     publishLocation: 'Container'
+
+# Optional: Add Slack/Teams notification tasks as needed
